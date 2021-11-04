@@ -1,10 +1,11 @@
 <?php
 
 namespace Engine;
+use Engine\Helper\Common;
 
 class Cms
 {
-    /*"Qwerty\\Cms\\": "src/",*/
+    /*"Qwerty\\cms\\": "src/",*/
 
     /**
      * @var
@@ -22,13 +23,19 @@ class Cms
     }
 
     /**
-     *  Run Cms
+     *  Run cms
     */
     public function run()
     {
         $this->router->add('home', '/', 'HomeController:index');
-        $this->router->add('product', '/product/{id}', 'ProductController:index');
-        print_r($this->di);
+        $this->router->add('product', '/user/12', 'ProductController:index');
+
+//        echo Common::getMethod();
+//        echo Common::getPathUrl();
+        $routerDispatch = $this->router->dispatch(Common::getMethod(), Common::getPathUrl());
+
+//        print_r($this->di);
+//        print_r($_SERVER);
 //        print_r($this->di);
 //        echo 'hello cms';
 
