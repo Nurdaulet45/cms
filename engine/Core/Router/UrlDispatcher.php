@@ -65,12 +65,18 @@ class UrlDispatcher
       if (array_key_exists($uri, $routes)) {
           return new DispatchedRoute($routes[$uri]);
       };
+      return $this->doDispatch($method, $uri);
     }
 
     public function doDispatch($method, $uri)
     {
         foreach ($this->routes($method) as $route => $controller) {
-            print $route;
+//            print $route;
+            $pattern = '#^' . $route . '$#s';
+            if (preg_match($pattern, $uri, $parameters)) {
+
+                return new DispatchedRoute($controller, $parameters);
+            }
 
         }
     }
